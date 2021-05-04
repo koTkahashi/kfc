@@ -2,6 +2,58 @@
  "cells": [
   {
    "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Requirement already satisfied: line-bot-sdk in c:\\users\\髙橋滉\\appdata\\local\\programs\\python\\python39\\lib\\site-packages (1.19.0)\n",
+      "Requirement already satisfied: requests>=2.0 in c:\\users\\髙橋滉\\appdata\\local\\programs\\python\\python39\\lib\\site-packages (from line-bot-sdk) (2.25.0)\n",
+      "Requirement already satisfied: future in c:\\users\\髙橋滉\\appdata\\local\\programs\\python\\python39\\lib\\site-packages (from line-bot-sdk) (0.18.2)\n",
+      "Requirement already satisfied: idna<3,>=2.5 in c:\\users\\髙橋滉\\appdata\\local\\programs\\python\\python39\\lib\\site-packages (from requests>=2.0->line-bot-sdk) (2.10)\n",
+      "Requirement already satisfied: chardet<4,>=3.0.2 in c:\\users\\髙橋滉\\appdata\\local\\programs\\python\\python39\\lib\\site-packages (from requests>=2.0->line-bot-sdk) (3.0.4)\n",
+      "Requirement already satisfied: certifi>=2017.4.17 in c:\\users\\髙橋滉\\appdata\\local\\programs\\python\\python39\\lib\\site-packages (from requests>=2.0->line-bot-sdk) (2020.11.8)\n",
+      "Requirement already satisfied: urllib3<1.27,>=1.21.1 in c:\\users\\髙橋滉\\appdata\\local\\programs\\python\\python39\\lib\\site-packages (from requests>=2.0->line-bot-sdk) (1.26.2)\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: You are using pip version 20.2.4; however, version 21.1.1 is available.\n",
+      "You should consider upgrading via the 'c:\\users\\髙橋滉\\appdata\\local\\programs\\python\\python39\\python.exe -m pip install --upgrade pip' command.\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Requirement already satisfied: flask in c:\\users\\髙橋滉\\appdata\\local\\programs\\python\\python39\\lib\\site-packages (1.1.2)\n",
+      "Requirement already satisfied: click>=5.1 in c:\\users\\髙橋滉\\appdata\\local\\programs\\python\\python39\\lib\\site-packages (from flask) (7.1.2)\n",
+      "Requirement already satisfied: itsdangerous>=0.24 in c:\\users\\髙橋滉\\appdata\\local\\programs\\python\\python39\\lib\\site-packages (from flask) (1.1.0)\n",
+      "Requirement already satisfied: Werkzeug>=0.15 in c:\\users\\髙橋滉\\appdata\\local\\programs\\python\\python39\\lib\\site-packages (from flask) (1.0.1)\n",
+      "Requirement already satisfied: Jinja2>=2.10.1 in c:\\users\\髙橋滉\\appdata\\local\\programs\\python\\python39\\lib\\site-packages (from flask) (2.11.2)\n",
+      "Requirement already satisfied: MarkupSafe>=0.23 in c:\\users\\髙橋滉\\appdata\\local\\programs\\python\\python39\\lib\\site-packages (from Jinja2>=2.10.1->flask) (1.1.1)\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "WARNING: You are using pip version 20.2.4; however, version 21.1.1 is available.\n",
+      "You should consider upgrading via the 'c:\\users\\髙橋滉\\appdata\\local\\programs\\python\\python39\\python.exe -m pip install --upgrade pip' command.\n"
+     ]
+    }
+   ],
+   "source": [
+    "!pip install line-bot-sdk\n",
+    "!pip install flask"
+   ]
+  },
+  {
+   "cell_type": "code",
    "execution_count": null,
    "metadata": {},
    "outputs": [],
@@ -24,26 +76,7 @@
    "cell_type": "code",
    "execution_count": null,
    "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      " * Serving Flask app \"__main__\" (lazy loading)\n",
-      " * Environment: production\n",
-      "   WARNING: This is a development server. Do not use it in a production deployment.\n",
-      "   Use a production WSGI server instead.\n",
-      " * Debug mode: off\n"
-     ]
-    },
-    {
-     "name": "stderr",
-     "output_type": "stream",
-     "text": [
-      " * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)\n"
-     ]
-    }
-   ],
+   "outputs": [],
    "source": [
     "app = Flask(__name__)\n",
     "\n",
