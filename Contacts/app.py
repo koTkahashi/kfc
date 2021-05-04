@@ -1,0 +1,121 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from flask import Flask, request, abort\n",
+    "\n",
+    "from linebot import (\n",
+    "    LineBotApi, WebhookHandler\n",
+    ")\n",
+    "from linebot.exceptions import (\n",
+    "    InvalidSignatureError\n",
+    ")\n",
+    "from linebot.models import (\n",
+    "    MessageEvent, TextMessage, TextSendMessage,\n",
+    ")\n",
+    "import os"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      " * Serving Flask app \"__main__\" (lazy loading)\n",
+      " * Environment: production\n",
+      "   WARNING: This is a development server. Do not use it in a production deployment.\n",
+      "   Use a production WSGI server instead.\n",
+      " * Debug mode: off\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      " * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)\n"
+     ]
+    }
+   ],
+   "source": [
+    "app = Flask(__name__)\n",
+    "\n",
+    "YOUR_CHANNEL_ACCESS_TOKEN = \"adCLwP6vZh5Ukj18CEzAMnh8Sh8tagXMLi1dkmtCCElGZG0SL4lkCV2EIEh/vtZM1lad6Sjw/ddFz/P3YcKZVf5jHTja34491UbpDl2DoDjG3kpTVWHBxfWs8q8OK2afBpmtRAxl0HIj5XIe+kKiGwdB04t89/1O/w1cDnyilFU=\"\n",
+    "YOUR_CHANNEL_SECRET = \"4f90b0eb1ed7b83a125381cc793baf51\"\n",
+    "\n",
+    "line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)\n",
+    "handler = WebhookHandler(YOUR_CHANNEL_SECRET)\n",
+    "\n",
+    "\n",
+    "@app.route(\"/\")\n",
+    "def hello_world():\n",
+    "    return \"hello world\"\n",
+    "\n",
+    "@app.route(\"/callback\", methods=['POST'])\n",
+    "def callback():\n",
+    "    # get X-Line-Signature header value\n",
+    "    signature = request.headers['X-Line-Signature']\n",
+    "\n",
+    "    # get request body as text\n",
+    "    body = request.get_data(as_text=True)\n",
+    "    app.logger.info(\"Request body: \" + body)\n",
+    "\n",
+    "    # handle webhook body\n",
+    "    try:\n",
+    "        handler.handle(body, signature)\n",
+    "    except InvalidSignatureError:\n",
+    "        print(\"Invalid signature. Please check your channel access token/channel secret.\")\n",
+    "        abort(400)\n",
+    "\n",
+    "    return 'OK'\n",
+    "\n",
+    "\n",
+    "@handler.add(MessageEvent, message=TextMessage)\n",
+    "def handle_message(event):\n",
+    "    line_bot_api.reply_message(\n",
+    "        event.reply_token,\n",
+    "        TextSendMessage(text=event.message.text))\n",
+    "\n",
+    "\n",
+    "if __name__ == \"__main__\":\n",
+    "    port = os.getenv(\"PORT\")\n",
+    "    app.run(host=\"0.0.0.0\",port=port)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.4"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}
